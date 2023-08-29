@@ -42,6 +42,9 @@ export default function Worddic(props) {
         document.getElementById('area').style.background='blue';  
     }
 
+    const clearText=()=>{
+        setText('');
+    }
     const toLower=()=>{
         var b=text.toLowerCase();
         setText(b);
@@ -63,6 +66,7 @@ export default function Worddic(props) {
             <button type="button" className="btn btn-primary" onClick={toUpper}>Upper</button>
             <button type="button" className="btn btn-success mx-5" onClick={toLower}>Lower</button>
             <button type="button" className="btn btn-danger" onClick={handleCopy}>Copy text</button>
+            <button type="button" className="btn btn-primary" onClick={clearText}>Clear Text</button>
             <br/><br/>
             <h5>Text Summary</h5>
             Total Words: {text.length} <br/>Words Count: {text.endsWith('') === ''? (text.split(' ').length)-1: text.split(' ').length}
