@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import Notifications from './Notifications';
-// import Alert from './components/Alert';
 
 export default function Worddic(props) {
     const handleCopy = () => {
-        var text = document.getElementById('area');
-        text.select();
-        navigator.clipboard.writeText(text.value);
+        navigator.clipboard.writeText(text);
+        document.getSelection().removeAllRanges();
         showAlert('text copied', 'success');
     }
 
@@ -79,7 +77,7 @@ export default function Worddic(props) {
 
     return (
         <div className='container my-4' style={style}>
-            <h1 style={style}>{props.title}</h1>
+            {/* <h1 style={style}>{props.title}</h1> */}
             {/* <button type="button" className={btnstyle} onClick={toggleStyle}>{btntext}</button> */}
             <div class="form-check form-switch">
                 <input className="form-check-input" onClick={toggleStyle} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
@@ -90,16 +88,15 @@ export default function Worddic(props) {
 
                 <textarea className="form-control" value={text} onChange={textChange} id="area" rows="10" style={style}></textarea>
             </div>
-            <button type="button" className="btn btn-primary" onClick={toUpper}>Upper</button>
-            <button type="button" className="btn btn-success mx-5" onClick={toLower}>Lower</button>
-            <button type="button" className="btn btn-danger" onClick={handleCopy}>Copy text</button>
-            <button type="button" className="btn btn-primary mx-5" onClick={clearText}>Clear Text</button>
+            <button type="button" className="btn btn-primary mx-1 my-1" onClick={toUpper}>Upper</button>
+            <button type="button" className="btn btn-success mx-1 my-1" onClick={toLower}>Lower</button>
+            <button type="button" className="btn btn-danger mx-1 my-1" onClick={handleCopy}>Copy text</button>
+            <button type="button" className="btn btn-primary mx-1 my-1" onClick={clearText}>Clear Text</button>
             <br /><br />
             <h5>Text Summary</h5>
-            Total Words: {text.length} <br />Words Count: {text.endsWith('') === '' ? (text.split(' ').length) - 1 : text.split(' ').length}
+            Total Words: {text.length} <br />Words Count: {text.split(' ').filter((ele)=>{return ele.length!==0}).length}
             <br /><br />
             <h5>Preview Text</h5> {text}
-
         </div>
     )
 }
